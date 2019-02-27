@@ -25,10 +25,11 @@ namespace Leetcode
 
         //Approach 1
         [TestMethod]
-        public int[] TwoSum()
+        public void TwoSum()
         {
             var nums = new int[] { 2, 7, 11, 15 };
             var target = 9;
+            int[] result;
 
             for (var i = 0; i < nums.Length; i++)
             {
@@ -36,20 +37,19 @@ namespace Leetcode
                 {
                     if (target - nums[i] == nums[j])
                     {
-                        return new int[] { i, j };
+                        result = new int[] { i, j };
                     }
                 }
             }
-
-            throw new Exception("Not Find");
         }
 
         //Approach 2
         [TestMethod]
-        public int[] TwoSum_2()
+        public void TwoSum_2()
         {
             var nums = new int[] { 2, 7, 11, 15 };
             var target = 9;
+            int[] result;
 
             var numDic = new Dictionary<int, int>();
             for (var i = 0; i < nums.Length; i++)
@@ -61,34 +61,31 @@ namespace Leetcode
             {
                 if (numDic.ContainsKey(target - nums[j]) && numDic[target - nums[j]] != j)
                 {
-                    return new int[] { j, numDic[target - nums[j]] };
+                    result = new int[] { j, numDic[target - nums[j]] };
                 }
             }
-
-            throw new Exception("Not found");
         }
 
         //Approach 3
         [TestMethod]
-        public int[] TwoSum_3()
+        public void TwoSum_3()
         {
             var nums = new int[] { 2, 7, 11, 15 };
             var target = 9;
+            int[] result;
 
             var numDic = new Dictionary<int, int>();
             for (var i = 0; i < nums.Length; i++)
             {
                 if (numDic.ContainsKey(target - nums[i]))
                 {
-                    return new int[] { numDic[target - nums[i]], i };
+                    result = new int[] { numDic[target - nums[i]], i };
                 }
                 else
                 {
                     numDic.Add(nums[i], i);
                 }
             }
-
-            throw new Exception("Not Found");
         }
 
         #endregion
@@ -105,26 +102,27 @@ namespace Leetcode
              */
 
         [TestMethod]
-        public int ContainerWithMostWater()
+        public void ContainerWithMostWater()
         {
+            int result;
             var input = new int[] { 1, 8, 6, 2, 5, 4, 8, 3, 7 };
 
-            List<int> result = new List<int>();
+            List<int> temp = new List<int>();
 
             for (var i = 0; i < input.Length; i++)
             {
                 for (var j = i + 1; j < input.Length; j++)
                 {
                     var min = input[i] > input[j] ? input[i] : input[j];
-                    result.Add(min * (j - i));
+                    temp.Add(min * (j - i));
                 }
             }
 
-            return result.Max();
+            result = temp.Max();
         }
 
         [TestMethod]
-        public int ContainerWithMostWater_2()
+        public void ContainerWithMostWater_2()
         {
             var input = new int[] { 1, 8, 6, 2, 5, 4, 8, 3, 7 };
 
@@ -142,7 +140,129 @@ namespace Leetcode
                 }
             }
 
-            return result;
+        }
+
+        [TestMethod]
+        public void ContainerWithMostWater_3()
+        {
+            var input = new int[] { 1, 8, 6, 2, 5, 4, 8, 3, 7 };
+
+            int result = 0;
+            var start = 0;
+            var end = input.Length - 1;
+            while (start < end)
+            {
+                var area = (end - start) * (input[start] > input[end] ? input[end] : input[start]);
+                result = result > area ? result : area;
+                if (input[start] > input[end])
+                {
+                    end--;
+                }
+                else
+                {
+                    start++;
+                }
+            }
+        }
+
+        #endregion
+
+        #region 3Sum
+
+        [TestMethod]
+        public void Sum3()
+        {
+            int[] input = new int[] { -1, 0, 1, 2, -1, -4 };
+
+            var temp = new List<List<int>>();
+            var sortResult = input.OrderBy(x => x).ToArray<int>();
+            for (var i = 0; i < sortResult.Length - 2; i++)
+            {
+                var start = i;
+                if (i > 0 && sortResult[i] == sortResult[i - 1])
+                {
+                    start = i + 1;
+                    continue;
+                }
+
+                var medium = start + 1;
+                var end = sortResult.Length - 1;
+                while (medium < end)
+                {
+                    if (sortResult[start] + sortResult[medium] + sortResult[end] > 0)
+                    {
+                        end = end - 1;
+                    }
+                    else if (sortResult[start] + sortResult[medium] + sortResult[end] < 0)
+                    {
+                        medium = medium + 1;
+                    }
+                    else
+                    {
+                        temp.Add(new List<int>() { sortResult[start], sortResult[medium], sortResult[end] });
+                        while (medium < end && sortResult[medium] == sortResult[medium + 1])
+                        {
+                            medium = medium + 1;
+                        }
+
+                        while (medium < end && sortResult[end] == sortResult[end - 1])
+                        {
+                            end = end - 1;
+                        }
+
+                        medium = medium + 1;
+                        end = end - 1;
+                    }
+                }
+            }
+
+            var result = temp.ToArray();
+        }
+
+        #endregion
+
+        #region RemoveDuplicates
+
+        [TestMethod]
+        public void RemoveDuplicates()
+        {
+            int[] input = new int[] { 0, 0, 1, 1, 1, 2, 2, 3, 3, 4 };
+
+            Dictionary<int, int> inputDic = new Dictionary<int, int>();
+            for (var i = 0; i < input.Length; i++)
+            {
+                if (!inputDic.ContainsKey(input[i]))
+                {
+                    inputDic.Add(input[i], i);
+                }
+            }
+
+            for (var i = 0; i < inputDic.Count(); i++)
+            {
+                input[i] = inputDic.ElementAt(i).Key;
+            }
+
+            var result = inputDic.Count();
+        }
+
+        [TestMethod]
+        public void RemoveDuplicates_2()
+        {
+            int[] input = new int[] { 0, 0, 1, 1, 1, 2, 2, 3, 3, 4 };
+
+            Dictionary<int, int> inputDic = new Dictionary<int, int>();
+            var index = 0;
+            for (var i = 0; i < input.Length; i++)
+            {
+                if (!inputDic.ContainsKey(input[i]))
+                {
+                    inputDic.Add(input[i], index);
+                    input[index] = input[i];
+                    index++;
+                }
+            }
+
+            var result = inputDic.Count();
         }
 
         #endregion
