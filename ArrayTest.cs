@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -75,9 +76,9 @@ namespace Leetcode
             var target = 9;
 
             var numDic = new Dictionary<int, int>();
-            for(var i=0; i< nums.Length; i++)
+            for (var i = 0; i < nums.Length; i++)
             {
-                if(numDic.ContainsKey(target - nums[i]))
+                if (numDic.ContainsKey(target - nums[i]))
                 {
                     return new int[] { numDic[target - nums[i]], i };
                 }
@@ -93,12 +94,55 @@ namespace Leetcode
         #endregion
 
         #region Container With Most Water
+        /*
+         
+            [1,8,6,2,5,4,8,3,7]
+            
+            49
+
+            49
+             
+             */
+
         [TestMethod]
-        public void TestMethod1()
+        public int ContainerWithMostWater()
         {
             var input = new int[] { 1, 8, 6, 2, 5, 4, 8, 3, 7 };
 
+            List<int> result = new List<int>();
 
+            for (var i = 0; i < input.Length; i++)
+            {
+                for (var j = i + 1; j < input.Length; j++)
+                {
+                    var min = input[i] > input[j] ? input[i] : input[j];
+                    result.Add(min * (j - i));
+                }
+            }
+
+            return result.Max();
+        }
+
+        [TestMethod]
+        public int ContainerWithMostWater_2()
+        {
+            var input = new int[] { 1, 8, 6, 2, 5, 4, 8, 3, 7 };
+
+            int result = 0;
+
+            for (var i = 0; i < input.Length; i++)
+            {
+                for (var j = i + 1; j < input.Length; j++)
+                {
+                    var square = (input[i] > input[j] ? input[i] : input[j]) * (j - i);
+                    if (result < square)
+                    {
+                        result = square;
+                    }
+                }
+            }
+
+            return result;
         }
 
         #endregion
