@@ -266,5 +266,154 @@ namespace Leetcode
         }
 
         #endregion
+
+        #region MedianofTwoSortedArrays
+        [TestMethod]
+        public void MedianofTwoSortedArrays()
+        {
+            var nums1 = new int[] { 1, 2 };
+            var nums2 = new int[] { 3, 4 };
+
+            var length1 = nums1.Length;
+            var length2 = nums2.Length;
+            var totalLength = length1 + length2;
+            var totalArray = new int[totalLength];
+
+            var n1 = 0;
+            var n2 = 0;
+            for (var i = 0; i < totalLength; i++)
+            {
+                if (n1 == nums1.Length)
+                {
+                    totalArray[i] = nums2[n2];
+                    n2++;
+                }
+                else if (n2 == nums2.Length)
+                {
+                    totalArray[i] = nums1[n1];
+                    n1++;
+                }
+                else if (nums1[n1] > nums2[n2])
+                {
+                    totalArray[i] = nums2[n2];
+                    n2++;
+                }
+                else
+                {
+                    totalArray[i] = nums1[n1];
+                    n1++;
+                }
+            }
+
+            double result;
+
+            if (totalLength % 2 == 0)
+            {
+                var half_1 = totalLength / 2 - 1;
+                var half_2 = half_1 + 1;
+                result = ((double)totalArray[half_1] + (double)totalArray[half_2]) / 2;
+            }
+            else
+            {
+                var half = (totalLength - 1) / 2;
+                result = (double)totalArray[half];
+            }
+        }
+
+        [TestMethod]
+        public void MedianofTwoSortedArrays_2()
+        {
+
+        }
+
+        #endregion
+
+        #region Merge 归并排序-递归法
+
+        public int[] Sort(int[] input)
+        {
+            if (input.Length <= 1)
+            {
+                return input;
+            }
+
+            int mid = input.Length / 2;
+            int start = 0;
+            int end = input.Length - 1;
+
+            int[] left = new int[] { };
+            int[] right = new int[] { };
+
+            for (var i = 0; i < input.Length; i++)
+            {
+                if (i >= start && i < mid)
+                {
+                    left[i] = input[i];
+                }
+                else
+                {
+                    right[i - mid] = input[i];
+                }
+            }
+
+            left = Sort(left);
+            right = Sort(right);
+
+            return Merge(left, right);
+        }
+
+        public int[] Merge(int[] A, int[] B)
+        {
+            var mergeResult = new int[A.Length + B.Length];
+            var tempA = 0;
+            var tempB = 0;
+            for (var i = 0; i < mergeResult.Length; i++)
+            {
+                if (tempA < A.Length && tempB < B.Length)
+                {
+                    if (A[tempA] > B[tempB])
+                    {
+                        mergeResult[i] = B[tempB];
+                        tempB++;
+                    }
+                    else
+                    {
+                        mergeResult[i] = A[tempA];
+                        tempA++;
+                    }
+                }
+
+                if (tempA >= A.Length)
+                {
+                    mergeResult[i] = B[tempB];
+                    tempB++;
+                }
+
+                if (tempB >= B.Length)
+                {
+                    mergeResult[i] = A[tempA];
+                    tempA++;
+                }
+            }
+
+            return mergeResult;
+        }
+
+        #endregion
+
+        #region Merge 归并排序-迭代法
+
+
+
+        #endregion
+
+        #region Search 二分查找
+
+        public void BinarySearch()
+        {
+
+        }
+
+        #endregion
     }
 }
