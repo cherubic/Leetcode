@@ -14,6 +14,7 @@ namespace Leetcode
         {
             public int val;
             public ListNode next;
+            public ListNode pre;
             public ListNode(int x) { val = x; }
         }
 
@@ -281,11 +282,11 @@ namespace Leetcode
 
             Dictionary<int, int> linkValueDic = new Dictionary<int, int>();
 
-            for (var i=0; i< lists.Length; i++ )
+            for (var i = 0; i < lists.Length; i++)
             {
                 ListNode tempNode = lists[i];
 
-                while (tempNode!=null)
+                while (tempNode != null)
                 {
                     if (linkValueDic.ContainsKey(tempNode.val))
                     {
@@ -302,12 +303,12 @@ namespace Leetcode
 
             ListNode result = null;
             ListNode nextNode = null;
-            for(var i = 0; i< linkValueDic.Count(); i++)
+            for (var i = 0; i < linkValueDic.Count(); i++)
             {
                 var tempDic = linkValueDic.OrderBy(x => x.Key).ToList();
-                for(var j = 0; j< tempDic[i].Value; j++)
+                for (var j = 0; j < tempDic[i].Value; j++)
                 {
-                    if(result == null)
+                    if (result == null)
                     {
                         result = new ListNode(tempDic[i].Key);
                         nextNode = result;
@@ -328,6 +329,29 @@ namespace Leetcode
 
         }
 
+        #endregion
+
+        #region Singly Linked List Operation
+
+        public void AddToIndex()
+        {
+        }
+
+        public void DeleteByIndex()
+        {
+        }
+
+        #endregion
+
+        #region Doubly Linked List
+
+
+        #endregion
+
+        #region Multiply Linked List
+        #endregion
+
+        #region Circular Linked List
         #endregion
     }
 }
