@@ -330,28 +330,5 @@ namespace Leetcode
         }
 
         #endregion
-
-        #region Singly Linked List Operation
-
-        public void AddToIndex()
-        {
-        }
-
-        public void DeleteByIndex()
-        {
-        }
-
-        #endregion
-
-        #region Doubly Linked List
-
-
-        #endregion
-
-        #region Multiply Linked List
-        #endregion
-
-        #region Circular Linked List
-        #endregion
     }
 }
