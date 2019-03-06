@@ -50,7 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithm.cs" />
-    <Compile Include="DataStruct\LinkedList.cs" />
+    <Compile Include="DataStructs\LinkedList.cs" />
+    <Compile Include="DataStructs\QueueDataStructs.cs" />
+    <Compile Include="DataStructs\StackDataStructs.cs" />
+    <Compile Include="DataStructs\TreeDataStructs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ArrayTest.cs" />
     <Compile Include="HashTableTest.cs" />
@@ -59,7 +62,6 @@
     <Compile Include="StackTest.cs" />
     <Compile Include="StringTest.cs" />
     <Compile Include="TwoPointer.cs" />
-    <Compile Include="StringTest.cs" />
     <Compile Include="BinarySearchTest.cs" />
   </ItemGroup>
   <ItemGroup>

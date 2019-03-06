@@ -9,8 +9,8 @@ namespace Leetcode
         [TestMethod]
         public void DivideTwoIntegers()
         {
-            var dividend = 7;
-            var divisor = -3;
+            var dividend = -2147483648;
+            var divisor = 1;
 
             var isNegative = ((dividend ^ divisor) >> 31);
             var result = 0;
