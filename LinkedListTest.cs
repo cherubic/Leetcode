@@ -335,11 +335,15 @@ namespace Leetcode
 
         public void AddToIndex()
         {
+
         }
 
         public void DeleteByIndex()
         {
+
         }
+
+        
 
         #endregion
 

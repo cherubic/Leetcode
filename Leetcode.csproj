@@ -55,6 +55,8 @@
     <Compile Include="HashTableTest.cs" />
     <Compile Include="LinkedListTest.cs" />
     <Compile Include="MathTest.cs" />
+    <Compile Include="StackTest.cs" />
+    <Compile Include="StringTest.cs" />
     <Compile Include="TwoPointer.cs" />
   </ItemGroup>
   <ItemGroup>
