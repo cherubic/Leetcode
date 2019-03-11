@@ -119,7 +119,6 @@ namespace Leetcode.DataStruct
 
         #endregion
 
-
         #region Doubly Linked List
 
         public class DoublyLinkedNode

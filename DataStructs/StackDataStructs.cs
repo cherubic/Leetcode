@@ -123,6 +123,5 @@ namespace Leetcode.DataStruct
         }
 
         #endregion
-
     }
 }
