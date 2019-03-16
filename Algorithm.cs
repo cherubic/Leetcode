@@ -8,6 +8,35 @@ namespace Leetcode
     [TestClass]
     public class Algorithm
     {
+        #region Insert Sort
+
+        [TestMethod]
+        public void InsertSortTest()
+        {
+            var input = new int[] { 9, 6, 3, 2, 5, 5, 8, 7, 4, 1, 96, 63, 32, 25, 58, 87, 74, 41, 10 };
+            input = new int[] { };
+            var result = input;
+            if (input == null) result = null;
+
+            //If input length < 2 and would not entry the code block.
+            for (var i = 1; i < input.Length; i++)
+            {
+                var j = i;
+                while (j - 1 >= 0 && input[j] < input[j - 1])
+                {
+                    if (input[j] < input[j - 1])
+                    {
+                        input[j] = input[j] ^ input[j - 1];
+                        input[j - 1] = input[j] ^ input[j - 1];
+                        input[j] = input[j] ^ input[j - 1];
+                        j--;
+                    }
+                }
+            }
+        }
+
+        #endregion
+
         #region Merge Sort
 
         [TestMethod]
@@ -62,68 +91,72 @@ namespace Leetcode
         }
 
         [TestMethod]
-        public void MergeSortRecurisve()
+        public void MergeSortRecursive()
         {
-            int[] input = new int[] { };
+            int[] input = new int[] { 9, 6, 3, 2, 5, 5, 8, 7, 4, 1, 96, 63, 32, 25, 58, 87, 74, 41, 10 };
             int[] result = new int[] { };
 
-            result = SortMerge(input);
+            result = SortMergeRecursive(input);
         }
 
-        public int[] SortMerge(int[] input)
+        public int[] SortMergeRecursive(int[] input)
         {
-            if (input.Length == 1) return input;
+            if (input == null) return input;
+            if (input.Length < 2) return input;
 
-            int k = input.Length / 2;
-            int[] leftArray = new int[k];
-            int[] rightArray = new int[input.Length - k];
-
-            for (var i = 0; i < k; i++)
+            var mid = input.Length / 2;
+            int[] leftArray = new int[mid];
+            for (var i = 0; i < mid; i++)
             {
                 leftArray[i] = input[i];
             }
 
-            for (var i = 0; i < input.Length - k; i++)
+            int[] rightArray = new int[input.Length-mid];
+            for (var i = mid; i < input.Length; i++)
             {
-                rightArray[i] = input[k + i];
+                rightArray[i - mid] = input[i];
             }
 
-            var leftInput = SortMerge(leftArray);
-            var rightInput = SortMerge(rightArray);
+            leftArray = SortMergeRecursive(leftArray);
+            rightArray = SortMergeRecursive(rightArray);
 
-            int leftIndex = 0;
-            int rightIndex = 0;
-            var mergeArray = new int[leftInput.Length + rightInput.Length];
-            int index = 0;
-
-            while (leftIndex < leftInput.Length || rightIndex < rightInput.Length)
+            var result = new int[input.Length];
+            var resultIndex = 0;
+            var leftIndex = 0;
+            var rightIndex = 0;
+            while (leftIndex < leftArray.Length && rightIndex < rightArray.Length)
             {
-                if (leftIndex == leftInput.Length)
+                if (leftArray[leftIndex] > rightArray[rightIndex])
                 {
-                    mergeArray[index] = rightInput[rightIndex];
+                    result[resultIndex] = rightArray[rightIndex];
                     rightIndex++;
-                }
-                else if (rightIndex == rightInput.Length)
-                {
-                    mergeArray[index] = leftInput[leftIndex];
-                    leftIndex++;
-                }
-                if (leftInput[leftIndex] < rightInput[rightIndex])
-                {
-                    mergeArray[index] = leftInput[leftIndex];
-                    leftIndex++;
                 }
                 else
                 {
-                    mergeArray[index] = rightInput[rightIndex];
-                    rightIndex++;
+                    result[resultIndex] = leftArray[leftIndex];
+                    leftIndex++;
                 }
 
-                index++;
+                resultIndex++;
             }
 
-            return mergeArray;
+            while (leftIndex == leftArray.Length && rightIndex < rightArray.Length)
+            {
+                result[resultIndex] = rightArray[rightIndex];
+                resultIndex++;
+                rightIndex++;
+            }
+
+            while (rightIndex == rightArray.Length && leftIndex < leftArray.Length)
+            {
+                result[resultIndex] = leftArray[leftIndex];
+                resultIndex++;
+                leftIndex++;
+            }
+
+            return result;
         }
+
 
         #endregion
 
