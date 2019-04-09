@@ -28,11 +28,21 @@ namespace Algorithm
          * 
          */
 
-
-        public int[] InsertSort()
+        public int[] InsertSort(int[] numbs)
         {
-            var result = new int[] { };
-            return result;
+            for (var i = 2; i < numbs.Length; i++)
+            {
+                var j = i;
+                while (j >= 1 && numbs[j] < numbs[j - 1])
+                {
+                    numbs[j] ^= numbs[j - 1];
+                    numbs[j - 1] ^= numbs[j];
+                    numbs[j] ^= numbs[j - 1];
+                    j--;
+                }
+            }
+
+            return numbs;
         }
 
         #endregion
@@ -72,9 +82,71 @@ namespace Algorithm
          *         MERGE(A, p, q, r)
          */
 
-        public int[] MergeSort()
+        public int[] MergeSort(int[] numbs)
         {
-            var result = new int[] { };
+            return MergeSort(numbs, 0, numbs.Length - 1);
+        }
+
+        private int[] MergeSort(int[] numbs, int start, int end)
+        {
+            if (start < end)
+            {
+                var mid = (start + end) / 2;
+                MergeSort(numbs, start, mid);
+                MergeSort(numbs, mid + 1, end);
+                return Merge(numbs, mid, start, end);
+            }
+            else
+            {
+                return new int[] { numbs[start] };
+            }
+        }
+
+        private int[] Merge(int[] numbs, int mid, int start, int end)
+        {
+            var result = new int[end - start + 1];
+            var leftArray = new int[mid - start + 2];
+            var rightArray = new int[end - mid + 1];
+            for (var i = 0; i < mid - start + 2; i++)
+            {
+                if (mid - start + 1 == i)
+                {
+                    leftArray[i] = int.MaxValue;
+                }
+                else
+                {
+                    leftArray[i] = numbs[start + i];
+                }
+            }
+
+            for (var i = 0; i < end - mid + 1; i++)
+            {
+                if (end - mid == i)
+                {
+                    rightArray[i] = int.MaxValue;
+                }
+                else
+                {
+                    rightArray[i] = numbs[mid + 1 + i];
+                }
+            }
+
+            var leftIndex = 0;
+            var rightIndex = 0;
+            for (var i = 0; i < end - start + 1; i++)
+            {
+                if (leftArray[leftIndex] < rightArray[rightIndex])
+                {
+                    result[i] = leftArray[leftIndex];
+                    leftIndex++;
+                }
+                else
+                {
+                    result[i] = rightArray[rightIndex];
+                    rightIndex++;
+                }
+            }
+
             return result;
         }
 
@@ -100,10 +172,29 @@ namespace Algorithm
          * pseudo code:
          * BUBBLESORT(A)
          *     for i = 1 to A.length - 1
+         *         for j = A.length downto i + 1
          *         if A[j] < A[j - 1]
          *             exchange A[j] with A[j - 1]
          * 
          */
+
+        public int[] BubbleSort(int[] numbs)
+        {
+            for (var i = 0; i < numbs.Length; i++)
+            {
+                for (var j = numbs.Length - 1; j > i; j--)
+                {
+                    if (numbs[j] < numbs[j - 1])
+                    {
+                        numbs[j] ^= numbs[j - 1];
+                        numbs[j - 1] ^= numbs[j];
+                        numbs[j] ^= numbs[j - 1];
+                    }
+                }
+            }
+
+            return numbs;
+        }
 
         #endregion
     }

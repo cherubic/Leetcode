@@ -8,7 +8,7 @@ namespace DataStruct
 {
     public class LinkedListDataStruct
     {
-        #region Singly LinkedLit
+        #region Singly LinkedList
         #endregion
 
         #region Doubly Linked List
