@@ -46,8 +46,6 @@ namespace Algorithm.Problem
         ///         
         /// </summary>
         /// <returns></returns>
-
-
         public int[] MaximumSubarray_1(int[] numbs)
         {
             return FindMaximumSubarray(numbs, 0, numbs.Length - 1);
