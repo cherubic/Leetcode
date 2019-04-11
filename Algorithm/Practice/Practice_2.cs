@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Algorithm.Practice
+namespace Algorithm
 {
     public class Practice_2
     {
@@ -108,41 +108,40 @@ namespace Algorithm.Practice
 
         }
 
-        /// <summary>
-        /// 找出数组中逆序对的数量
-        /// 
-        /// COUNT-INVERSIONS(A, p, r)
-        ///     inversion = 0
-        ///     if p < r
-        ///         q = floor((p + r) / )
-        ///         inversions = inversions + COUNT-INVERSIONS(A, p, q)
-        ///         inversions = inversions + COUNT-INVERSIONS(A, q + 1, r)
-        ///         inversions = inversions + MERGE-INVERSIONS(A, p, q, r)
-        ///     return inversions
-        ///     
-        /// MERGE-INVERSIONS(A, p, q, r)
-        ///     n[1] = q - p + 1;
-        ///     n[2] = r - q
-        ///     let L[1..n[1] + 1] and R[1..n[2] + 1] be new arrays
-        ///     for i = 1 to n[2]
-        ///         L[i] = A[p + i - 1]
-        ///     for j = 1 to n[2]
-        ///         R[j] = A[q + j]
-        ///     L[n[1] + 1] = limitation
-        ///     L[n[2] + 1] = limitation
-        ///     i = 1
-        ///     j = 1
-        ///     inversions = 0
-        ///     for k = p to r
-        ///         if R[j] < L[i]
-        ///             inversions = inversions + n[1] - i + 1
-        ///             A[k] = R[j]
-        ///             j = j + 1
-        ///         else A[k] = L[i]
-        ///             i = i + 1
-        ///     return inversions
-        ///     
-        /// </summary>
+        /*
+         * 找出数组中逆序对的数量
+         * 
+         * COUNT-INVERSIONS(A, p, r)
+         *     inversion = 0
+         *     if p < r
+         *         q = floor((p + r) / )
+         *         inversions = inversions + COUNT-INVERSIONS(A, p, q)
+         *         inversions = inversions + COUNT-INVERSIONS(A, q + 1, r)
+         *         inversions = inversions + MERGE-INVERSIONS(A, p, q, r)
+         *     return inversions
+         *     
+         * MERGE-INVERSIONS(A, p, q, r)
+         *     n[1] = q - p + 1;
+         *     n[2] = r - q
+         *     let L[1..n[1] + 1] and R[1..n[2] + 1] be new arrays
+         *     for i = 1 to n[2]
+         *         L[i] = A[p + i - 1]
+         *     for j = 1 to n[2]
+         *         R[j] = A[q + j]
+         *     L[n[1] + 1] = limitation
+         *     L[n[2] + 1] = limitation
+         *     i = 1
+         *     j = 1
+         *     inversions = 0
+         *     for k = p to r
+         *         if R[j] < L[i]
+         *             inversions = inversions + n[1] - i + 1
+         *             A[k] = R[j]
+         *             j = j + 1
+         *         else A[k] = L[i]
+         *             i = i + 1
+         *     return inversions
+         */
         public int Thinking_2_4(int[] numbs)
         {
             return CountInversions(numbs, 0, numbs.Length - 1);

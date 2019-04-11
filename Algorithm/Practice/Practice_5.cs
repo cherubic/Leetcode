@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Algorithm.Practice
+namespace Algorithm
 {
     public class Practice_5
     {
