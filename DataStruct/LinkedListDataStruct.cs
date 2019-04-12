@@ -50,6 +50,62 @@ namespace DataStruct
     public class LinkedListDataStruct
     {
         #region Singly LinkedList
+
+        public class SinglyLinkedListNode
+        {
+            public int Val;
+            public SinglyLinkedListNode Next;
+        }
+
+        public class SinglyLinkedList
+        {
+            public SinglyLinkedListNode headNode;
+            public int Length;
+        }
+
+        public int SinglyLinkedListSearch(SinglyLinkedList singlyLinkedList, int key)
+        {
+            var next = singlyLinkedList.headNode;
+            while (next != null)
+            {
+                if (next.Val == key)
+                {
+                }
+            }
+
+            return 0;
+        }
+
+        public void SinglyLinkedListInsertAfter(SinglyLinkedList singlyLinkedList, int val)
+        {
+            var next = singlyLinkedList.headNode;
+            while (next != null)
+            {
+                next = next.Next;
+            }
+
+            next = new SinglyLinkedListNode() { Next = null, Val = val };
+        }
+
+        public void SinglyLinkedListInsertBeginning(SinglyLinkedList singlyLinkedList, int val)
+        {
+            singlyLinkedList.headNode = new SinglyLinkedListNode() { Next = singlyLinkedList.headNode, Val = val };
+        }
+
+        public void SinglyLinkedListDelete(SinglyLinkedList singlyLinkedList, int val)
+        {
+            var next = singlyLinkedList.headNode;
+            while (next != null)
+            {
+                if (next.Val == val)
+                {
+
+                }
+            }
+
+
+        }
+
         #endregion
 
         #region Doubly Linked List

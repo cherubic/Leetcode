@@ -191,6 +191,15 @@ namespace Algorithm
         #region Heap sort
 
         /*
+         * LEFT(i)
+         *     return 2i;
+         *     
+         * RIGHT(i)
+         *     return 2i+1;
+         *     
+         * PARENT(i)
+         *     return floor(i/2);
+         * 
          * MAX-HEAPIFY(A, i)
          *     l = LEFT(i)
          *     R = RIGHT(i)
@@ -218,6 +227,78 @@ namespace Algorithm
          *         
          */
 
+        public int Parent(int i)
+        {
+            return 2 * i;
+        }
+
+        public int Left(int i)
+        {
+            return 2 * i + 1;
+        }
+
+        public int Right(int i)
+        {
+            return 2 * i + 2;
+        }
+
+        public int[] MaxHeapify(int[] numbs, int i)
+        {
+            var left = Left(i);
+            var right = Right(i);
+            var largest = int.MinValue;
+            if (left <= numbs.Length && numbs[left] > numbs[i])
+            {
+                largest = left;
+            }
+            else
+            {
+                largest = i;
+            }
+
+            if (right <= numbs.Length && numbs[left] > numbs[largest])
+            {
+                largest = right;
+            }
+
+            if (largest != i)
+            {
+                numbs[i] ^= numbs[largest];
+                numbs[largest] ^= numbs[i];
+                numbs[i] ^= numbs[largest];
+            }
+
+            return MaxHeapify(numbs, largest);
+        }
+
+        public int[] BuildMaxHeap(int[] numbs)
+        {
+            for (var i = numbs.Length / 2; i >= 1; i--)
+            {
+                numbs = MaxHeapify(numbs, i);
+            }
+            return numbs;
+        }
+
+        public int[] HeapSort(int[] numbs)
+        {
+            var result = new List<int>();
+            for (var i = numbs.Length - 1; i >= 0; i--)
+            {
+                result.Add(numbs[0]);
+                numbs[0] ^= numbs[i];
+                numbs[i] ^= numbs[0];
+                numbs[0] ^= numbs[i];
+
+                var temp = numbs.ToList();
+                temp.RemoveAt(i);
+                numbs = temp.ToArray();
+
+                numbs = MaxHeapify(numbs, 0);
+            }
+
+            return result.ToArray();
+        }
 
         #region Priority queue
 
@@ -248,7 +329,55 @@ namespace Algorithm
          *     HEAP-INCREASE-KEY(A, A.heap-size, key)
          *     
          */
+        public int HeapMaximum(int[] numbs)
+        {
+            return numbs[0];
+        }
 
+        public int HeapExtractMax(int[] numbs)
+        {
+            if (numbs.Length < 1)
+            {
+                throw new Exception("Heap Underflow");
+            }
+
+            var max = numbs[0];
+            numbs[0] = numbs[numbs.Length - 1];
+            numbs = MaxHeapify(numbs, 0);
+            return max;
+        }
+
+        public int[] HeapIncreaseKey(int[] numbs, int i, int key)
+        {
+            if (key < numbs[i])
+            {
+                throw new Exception("New key is smaller than current key");
+            }
+
+            numbs[i] = key;
+            while (i > 0 && numbs[Parent(i)] < numbs[i])
+            {
+                numbs[i] ^= numbs[Parent(i)];
+                numbs[Parent(i)] ^= numbs[i];
+                numbs[i] ^= numbs[Parent(i)];
+
+                i = Parent(i);
+            }
+
+            return numbs;
+        }
+
+        public int[] MaxHeapInsert(int[] numbs, int key)
+        {
+            var result = new int[numbs.Length + 1];
+            result[numbs.Length] = int.MinValue;
+            for (var i = 0; i < numbs.Length; i++)
+            {
+                result[i] = numbs[i];
+            }
+
+            return HeapIncreaseKey(result, result.Length, key);
+        }
 
         #endregion
 
@@ -256,6 +385,10 @@ namespace Algorithm
 
         #region Quick Sort
 
+        /*
+         * 
+         * 
+         */
         public int[] QuickSort()
         {
             var result = new int[] { };
@@ -263,7 +396,5 @@ namespace Algorithm
         }
 
         #endregion
-
-
     }
 }
