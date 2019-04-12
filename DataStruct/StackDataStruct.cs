@@ -92,8 +92,61 @@ namespace DataStruct
 
         #region Linked List Stack
 
+        public class LinkedListStackNode
+        {
+            public int Val;
+            public LinkedListStackNode NextNode;
+        }
+
         public class LinkedListStack
         {
+            public LinkedListStackNode TopNode;
+            public int Length;
+
+            public LinkedListStack()
+            {
+                Length = 0;
+            }
+        }
+
+        public bool LinkedListStackEmpty(LinkedListStack linkedListStack)
+        {
+            return linkedListStack.Length == 0;
+        }
+
+        public void LinkedListStackPush(LinkedListStack linkedListStack, int val)
+        {
+            linkedListStack.TopNode = new LinkedListStackNode() { Val = val, NextNode = linkedListStack.TopNode };
+            linkedListStack.Length++;
+        }
+
+        public int LinkedListStackPop(LinkedListStack linkedListStack)
+        {
+            int result;
+            if (LinkedListStackEmpty(linkedListStack))
+            {
+                throw new Exception("underflow");
+            }
+            else
+            {
+                result = linkedListStack.TopNode.Val;
+                linkedListStack.TopNode = linkedListStack.TopNode.NextNode;
+                linkedListStack.Length--;
+            }
+
+            return result;
+        }
+
+        public int LinkedListStackTop(LinkedListStack linkedListStack)
+        {
+            if (LinkedListStackEmpty(linkedListStack))
+            {
+                throw new Exception("underflow");
+            }
+            else
+            {
+                return linkedListStack.TopNode.Val;
+            }
         }
 
 
