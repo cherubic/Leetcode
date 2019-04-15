@@ -18,7 +18,7 @@ namespace Algorithm
             for (var i = 1; i < numbs.Length; i++)
             {
                 var j = i;
-                while (j > 1 && numbs[j] > numbs[j - 1])
+                while (j >= 1 && numbs[j] > numbs[j - 1])
                 {
                     numbs[j] ^= numbs[j - 1];
                     numbs[j - 1] ^= numbs[j];
@@ -35,6 +35,7 @@ namespace Algorithm
         /// </summary>
         public int[] Problem_3_2(int[] numbs)
         {
+            if (numbs == null || numbs.Length == 0) return numbs;
             return MergeSort(numbs, 0, numbs.Length - 1);
         }
 
@@ -43,9 +44,9 @@ namespace Algorithm
             if (start < end)
             {
                 var mid = (start + end) / 2;
-                MergeSort(numbs, start, mid);
-                MergeSort(numbs, mid + 1, end);
-                return Merge(numbs, mid, start, end);
+                var left = MergeSort(numbs, start, mid);
+                var right = MergeSort(numbs, mid + 1, end);
+                return Merge(left, right);
             }
             else
             {
@@ -53,47 +54,44 @@ namespace Algorithm
             }
         }
 
-        private int[] Merge(int[] numbs, int mid, int start, int end)
+        private int[] Merge(int[] left, int[] right)
         {
-            var result = new int[end - start + 1];
-
-            var leftLength = mid - start + 1;
-            var rightLength = end - mid;
-
+            var result = new int[left.Length + right.Length];
             var leftIndex = 0;
-            var rightIndex = mid + 1;
+            var rightIndex = 0;
             var resultIndex = 0;
-            while (leftIndex < leftLength && rightIndex < rightLength)
+
+            while (leftIndex < left.Length && rightIndex < right.Length)
             {
-                if (numbs[start + leftIndex] < numbs[mid + rightIndex])
+                if (left[leftIndex] < right[rightIndex])
                 {
-                    result[resultIndex] = numbs[mid + rightIndex];
-                    rightIndex++;
+                    result[resultIndex] = left[leftIndex];
+                    leftIndex++;
                 }
                 else
                 {
-                    result[resultIndex] = numbs[start + leftIndex];
-                    leftIndex++;
+                    result[resultIndex] = right[rightIndex];
+                    rightIndex++;
                 }
 
                 resultIndex++;
             }
 
-            if (leftLength == leftIndex)
+            if (left.Length == leftIndex)
             {
-                while (rightIndex < rightLength)
+                while (rightIndex < right.Length)
                 {
-                    result[resultIndex] = numbs[mid + rightIndex];
+                    result[resultIndex] = right[rightIndex];
                     rightIndex++;
                     resultIndex++;
                 }
             }
 
-            if (rightIndex == rightLength)
+            if (rightIndex == right.Length)
             {
-                while (leftIndex < leftLength)
+                while (leftIndex < left.Length)
                 {
-                    result[resultIndex] = numbs[start + leftIndex];
+                    result[resultIndex] = left[leftIndex];
                     leftIndex++;
                     resultIndex++;
                 }
@@ -102,6 +100,10 @@ namespace Algorithm
             return result;
         }
 
+        public void Problem_3_5()
+        {
+
+        }
 
         public void Problem_3_6()
         {

@@ -30,7 +30,7 @@ namespace Algorithm
 
         public int[] InsertSort(int[] numbs)
         {
-            for (var i = 2; i < numbs.Length; i++)
+            for (var i = 1; i < numbs.Length; i++)
             {
                 var j = i;
                 while (j >= 1 && numbs[j] < numbs[j - 1])
@@ -50,6 +50,8 @@ namespace Algorithm
         #region Merge Sort
 
         /*
+         * This way is with sentinel, it will cost some exceptions when the range out of the limitation.
+         * 
          * time complexity: O(n * lg n)
          * space complexity: 
          * 
@@ -84,6 +86,7 @@ namespace Algorithm
 
         public int[] MergeSort(int[] numbs)
         {
+            if (numbs == null || numbs.Length == 0) return numbs;
             return MergeSort(numbs, 0, numbs.Length - 1);
         }
 
@@ -92,9 +95,9 @@ namespace Algorithm
             if (start < end)
             {
                 var mid = (start + end) / 2;
-                MergeSort(numbs, start, mid);
-                MergeSort(numbs, mid + 1, end);
-                return Merge(numbs, mid, start, end);
+                var left = MergeSort(numbs, start, mid);
+                var right = MergeSort(numbs, mid + 1, end);
+                return Merge(left, right);
             }
             else
             {
@@ -102,38 +105,31 @@ namespace Algorithm
             }
         }
 
-        private int[] Merge(int[] numbs, int mid, int start, int end)
+        private int[] Merge(int[] left, int[] right)
         {
-            var result = new int[end - start + 1];
-            var leftArray = new int[mid - start + 2];
-            var rightArray = new int[end - mid + 1];
-            for (var i = 0; i < mid - start + 2; i++)
+            var result = new int[left.Length + right.Length];
+
+            var leftArray = new int[left.Length + 1];
+            var rightArray = new int[right.Length + 1];
+
+            for (var i = 0; i < left.Length; i++)
             {
-                if (mid - start + 1 == i)
-                {
-                    leftArray[i] = int.MaxValue;
-                }
-                else
-                {
-                    leftArray[i] = numbs[start + i];
-                }
+                leftArray[i] = left[i];
             }
 
-            for (var i = 0; i < end - mid + 1; i++)
+            leftArray[left.Length] = int.MaxValue;
+
+            for (var i = 0; i < right.Length; i++)
             {
-                if (end - mid == i)
-                {
-                    rightArray[i] = int.MaxValue;
-                }
-                else
-                {
-                    rightArray[i] = numbs[mid + 1 + i];
-                }
+                rightArray[i] = right[i];
             }
+
+            rightArray[right.Length] = int.MaxValue;
 
             var leftIndex = 0;
             var rightIndex = 0;
-            for (var i = 0; i < end - start + 1; i++)
+
+            for (var i = 0; i < left.Length + right.Length; i++)
             {
                 if (leftArray[leftIndex] < rightArray[rightIndex])
                 {
@@ -247,7 +243,7 @@ namespace Algorithm
             var left = Left(i);
             var right = Right(i);
             var largest = int.MinValue;
-            if (left <= numbs.Length && numbs[left] > numbs[i])
+            if (left < numbs.Length && numbs[left] > numbs[i])
             {
                 largest = left;
             }
@@ -256,7 +252,7 @@ namespace Algorithm
                 largest = i;
             }
 
-            if (right <= numbs.Length && numbs[left] > numbs[largest])
+            if (right < numbs.Length && numbs[right] > numbs[largest])
             {
                 largest = right;
             }
@@ -266,14 +262,15 @@ namespace Algorithm
                 numbs[i] ^= numbs[largest];
                 numbs[largest] ^= numbs[i];
                 numbs[i] ^= numbs[largest];
+                MaxHeapify(numbs, largest);
             }
 
-            return MaxHeapify(numbs, largest);
+            return numbs;
         }
 
         public int[] BuildMaxHeap(int[] numbs)
         {
-            for (var i = numbs.Length / 2; i >= 1; i--)
+            for (var i = numbs.Length / 2; i >= 0; i--)
             {
                 numbs = MaxHeapify(numbs, i);
             }
@@ -282,10 +279,10 @@ namespace Algorithm
 
         public int[] HeapSort(int[] numbs)
         {
-            var result = new List<int>();
+            var result = new int[numbs.Length];
             for (var i = numbs.Length - 1; i >= 0; i--)
             {
-                result.Add(numbs[0]);
+                result[i] = numbs[0];
                 numbs[0] ^= numbs[i];
                 numbs[i] ^= numbs[0];
                 numbs[0] ^= numbs[i];
@@ -297,7 +294,7 @@ namespace Algorithm
                 numbs = MaxHeapify(numbs, 0);
             }
 
-            return result.ToArray();
+            return result;
         }
 
         #region Priority queue
