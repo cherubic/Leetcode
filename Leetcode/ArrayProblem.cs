@@ -22,7 +22,6 @@ namespace Leetcode
          * return [0, 1].
          * 
          */
-
         /// <summary>
         /// time complexity: O(n^2) 
         /// </summary>
@@ -84,7 +83,6 @@ namespace Leetcode
          * Output: 49
          * 
          */
-
         public int ContainerWithMostWater(int[] height)
         {
             var result = 0;
@@ -142,7 +140,6 @@ namespace Leetcode
          *  [-1, -1, 2]
          * ]
          */
-
         public IList<IList<int>> Sum3(int[] nums)
         {
             var result = new List<List<int>>();
@@ -224,7 +221,6 @@ namespace Leetcode
          * }
          * 
          */
-
         public int RemoveDuplicates(int[] nums)
         {
             Dictionary<int, int> numsDic = new Dictionary<int, int>();
@@ -265,7 +261,6 @@ namespace Leetcode
          * The median is (2 + 3)/2 = 2.5
          * 
          */
-
         public double FindMedianSortedArrays(int[] nums1, int[] nums2)
         {
             var length1 = nums1.Length;
