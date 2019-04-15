@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="ArrayProblem.cs" />
     <Compile Include="BinarySearchProblem.cs" />
+    <Compile Include="DivideAndConquer.cs" />
     <Compile Include="HashTableProblem.cs" />
     <Compile Include="LinkedListProblem.cs" />
     <Compile Include="MathProblem.cs" />

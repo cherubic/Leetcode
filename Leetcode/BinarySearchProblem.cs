@@ -10,5 +10,17 @@ namespace Leetcode
     {
         #region DivideTwoIntegers
         #endregion
+
+        #region Find First and Last Position of Element is Sorted Array
+        #endregion
+
+        #region Search Insert Position
+        #endregion
+
+        #region Sqrt(x)
+        #endregion
+
+        #region FindMinimum in Rotated Sorted Array II
+        #endregion
     }
 }
