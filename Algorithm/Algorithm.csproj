@@ -41,10 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BinarySearchTree.cs" />
     <Compile Include="Practice\Practice_2.cs" />
     <Compile Include="Practice\Practice_4.cs" />
     <Compile Include="Practice\Practice_5.cs" />
     <Compile Include="Practice\Practice_6.cs" />
+    <Compile Include="Practice\Pratice_12.cs" />
     <Compile Include="Problem\Problem_4.cs" />
     <Compile Include="Problem\Problem_5.cs" />
     <Compile Include="Problem\Problem_6.cs" />
