@@ -80,5 +80,15 @@ namespace Algorithm
         {
 
         }
+
+        public void Problem_3_1()
+        {
+
+        }
+
+        public void Problem_3_6()
+        {
+
+        }
     }
 }

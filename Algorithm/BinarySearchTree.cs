@@ -16,6 +16,11 @@ namespace Algorithm
             public Node Parent;
         }
 
+        public class Tree
+        {
+            public Node Root;
+        }
+
         /*
          * 中序遍历
          * 
@@ -203,6 +208,39 @@ namespace Algorithm
          *         y.left = z
          *     else y.right = z
          */
+        public Tree TreeInsert(Tree t, Node z)
+        {
+            Node y = null;
+            Node x = t.Root;
+            while (x != null)
+            {
+                y = x;
+                if (z.Val < x.Val)
+                {
+                    x = x.Left;
+                }
+                else
+                {
+                    x = x.Right;
+                }
+            }
+
+            z.Parent = y;
+            if (y == null)
+            {
+                t.Root = z;
+            }
+            else if (z.Val < y.Val)
+            {
+                y.Left = z;
+            }
+            else
+            {
+                y.Right = z;
+            }
+
+            return t;
+        }
 
         /*
          * TRANSPLANT(T, u, v)
@@ -214,6 +252,26 @@ namespace Algorithm
          *     if v != NIL
          *         v.p = u.p
          */
+        public void Transplant(Tree t, Node u, Node v)
+        {
+            if (u.Parent == null)
+            {
+                t.Root = v;
+            }
+            else if (u == u.Parent.Left)
+            {
+                u.Parent.Left = v;
+            }
+            else
+            {
+                u.Parent.Right = v;
+            }
+
+            if (v != null)
+            {
+                v.Parent = u.Parent;
+            }
+        }
 
         /*
          * TREE-DELETE(T, z)
@@ -221,7 +279,7 @@ namespace Algorithm
          *         TRANSPLANT(T, z, z.right)
          *     else if z.right == NIL
          *         TRANSPLANT(T, z, z.left)
-         *     else y = TREE-MINIMUM(z, right)
+         *     else y = TREE-MINIMUM(z.right)
          *         if y.p != z
          *             TRANSPLANT(T, y, y.right)
          *             y.right = z.right
@@ -230,5 +288,29 @@ namespace Algorithm
          *         y.left = z.left
          *         y.left.p = y
          */
+        public void TreeDelete(Tree t, Node z)
+        {
+            if (z.Left == null)
+            {
+                Transplant(t, z, z.Right);
+            }
+            else if (z.Right == null)
+            {
+                Transplant(t, z, z.Left);
+            }
+            else
+            {
+                var y = TreeMinmum(z.Right);
+                if (y.Parent != z)
+                {
+                    Transplant(t, y, y.Right);
+                    y.Right = z.Right;
+                    y.Right.Parent = y;
+                }
+                Transplant(t, z, y);
+                y.Left = z.Left;
+                y.Left.Parent = y;
+            }
+        }
     }
 }
