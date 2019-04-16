@@ -223,15 +223,47 @@ namespace Leetcode
          */
         public bool SearchMatrix(int[,] matrix, int target)
         {
-            var row = matrix.GetLength(0);
-            var column = matrix.GetLength(1);
+            if (matrix == null || matrix.Length < 1)
+            {
+                return false;
+            }
+
+            int row = 0;
+            int col = matrix.GetLength(1) - 1;
+
+            while (col >= 0 && row < matrix.GetLength(0))
+            {
+                if (target == matrix[row, col])
+                {
+                    return true;
+                }
+                else if (target < matrix[row, col])
+                {
+                    col--;
+                }
+                else
+                {
+                    row++;
+                }
+            }
+
             return false;
+        }
+
+        public bool SearchMatrix2(int[,] matrix, int target)
+        {
+            if (matrix == null || matrix.Length < 1)
+            {
+                return false;
+            }
+
+            int rowEnd = matrix.GetLength(0) - 1;
+            int colEnd = matrix.GetLength(1) - 1;
+            return SearchMatrix(matrix, target, 0, rowEnd, 0, colEnd);
         }
 
         private bool SearchMatrix(int[,] matrix, int target, int rowStart, int rowEnd, int columnStart, int columnEnd)
         {
-
-
             return false;
         }
         #endregion

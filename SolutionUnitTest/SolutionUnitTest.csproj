@@ -51,8 +51,10 @@
   <ItemGroup>
     <Compile Include="AlgorithmSortTest.cs" />
     <Compile Include="BeautyProblem1Test.cs" />
+    <Compile Include="LeetcodeDivideAndConquer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Practice2Test.cs" />
+    <Compile Include="LeetcodeDynamicProgramming.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>
   <ItemGroup>

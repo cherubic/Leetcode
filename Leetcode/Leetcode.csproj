@@ -47,6 +47,7 @@
     <Compile Include="HashTableProblem.cs" />
     <Compile Include="LinkedListProblem.cs" />
     <Compile Include="MathProblem.cs" />
+    <Compile Include="DynamicProgramming.cs" />
     <Compile Include="StackProblem.cs" />
     <Compile Include="StringProblem.cs" />
     <Compile Include="TwoPointerProblem.cs" />
