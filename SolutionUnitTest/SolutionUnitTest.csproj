@@ -55,6 +55,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Practice2Test.cs" />
     <Compile Include="LeetcodeDynamicProgramming.cs" />
+    <Compile Include="LeetcodeStackTest.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>
   <ItemGroup>
