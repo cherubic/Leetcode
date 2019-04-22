@@ -101,7 +101,7 @@ namespace Algorithm
          *         x = x.left
          *     return x
          */
-        public Node TreeMinmum(Node x)
+        public Node TreeMinimum(Node x)
         {
             while (x.Left != null)
             {
@@ -118,7 +118,7 @@ namespace Algorithm
          *         x = x.right
          *     return x
          */
-        public Node TreeMaxmum(Node x)
+        public Node TreeMaximum(Node x)
         {
             while (x.Right != null)
             {
@@ -147,7 +147,7 @@ namespace Algorithm
         {
             if (x.Right != null)
             {
-                return TreeMinmum(x.Right);
+                return TreeMinimum(x.Right);
             }
 
             var y = x.Parent;
@@ -178,7 +178,7 @@ namespace Algorithm
         {
             if (x.Right != null)
             {
-                return TreeMaxmum(x.Left);
+                return TreeMaximum(x.Left);
             }
 
             var y = x.Parent;
@@ -299,7 +299,7 @@ namespace Algorithm
             }
             else
             {
-                var y = TreeMinmum(z.Right);
+                var y = TreeMinimum(z.Right);
                 if (y.Parent != z)
                 {
                     Transplant(t, y, y.Right);
