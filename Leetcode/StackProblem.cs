@@ -101,9 +101,56 @@ namespace Leetcode
         /*
          * https://leetcode.com/problems/largest-rectangle-in-histogram/
          */
-        public int LargestRectangleArea()
+        public int LargestRectangleArea(int[] heights)
+        {
+            var low = 0;
+            var result = 0;
+            LargestRectangleArea(heights, 0, heights.Length - 1, ref result, ref low);
+            return result;
+        }
+
+        private int LargestRectangleAreaStack(int[] heights)
         {
             return 0;
         }
+
+        private void LargestRectangleArea(int[] heights, int start, int end, ref int result, ref int low)
+        {
+            if (start == end)
+            {
+                result = heights[start];
+                low = heights[start];
+            }
+            else
+            {
+                var mid = (start + end) / 2;
+                var lowleft = 0;
+                var lowright = 0;
+                var resultleft = 0;
+                var resultright = 0;
+
+                LargestRectangleArea(heights, start, mid, ref resultleft, ref lowleft);
+                LargestRectangleArea(heights, mid + 1, end, ref resultright, ref lowright);
+
+                var loweast = lowleft < lowright ? lowleft : lowright;
+                var mergeresult = loweast * (end - start + 1);
+                if (resultleft > resultright && resultleft > mergeresult)
+                {
+                    low = lowleft;
+                    result = resultleft;
+                }
+                else if (resultright > resultleft && resultright > mergeresult)
+                {
+                    low = lowright;
+                    result = resultright;
+                }
+                else
+                {
+                    low = loweast;
+                    result = mergeresult;
+                }
+            }
+        }
+
     }
 }

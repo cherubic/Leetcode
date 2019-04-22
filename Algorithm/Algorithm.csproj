@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinarySearchTree.cs" />
+    <Compile Include="Practice\Practice_10.cs" />
     <Compile Include="Practice\Practice_2.cs" />
     <Compile Include="Practice\Practice_4.cs" />
     <Compile Include="Practice\Practice_5.cs" />

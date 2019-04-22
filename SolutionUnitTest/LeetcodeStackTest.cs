@@ -20,5 +20,12 @@ namespace SolutionUnitTest
             var stack = new StackProblem();
             stack.ValidParentheses("/home//foo/");
         }
+
+        [TestMethod]
+        public void LargestRectangleAreaTest()
+        {
+            var stack = new StackProblem();
+            stack.LargestRectangleArea(new int[] { 2, 1, 5, 6, 2, 3 });
+        }
     }
 }
