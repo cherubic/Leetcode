@@ -101,19 +101,35 @@ namespace Leetcode
         /*
          * https://leetcode.com/problems/largest-rectangle-in-histogram/
          */
-        public int LargestRectangleArea(int[] heights)
+        public int LargestRectangleAreaStack(int[] heights)
         {
-            var low = 0;
-            var result = 0;
-            LargestRectangleArea(heights, 0, heights.Length - 1, ref result, ref low);
-            return result;
+            var maxArea = 0;
+            var stack = new Stack<int>();
+
+            for (var i = 0; i < heights.Length; i++)
+            {
+                if (stack.Count() == 0 || heights[i] >= heights[stack.Peek()])
+                {
+                    stack.Push(i);
+                }
+                else
+                {
+                    var top = stack.Pop();
+                    maxArea = Math.Max(maxArea, (heights[top] * (stack.Count() == 0 ? i : i - 1 - stack.Peek())));
+                    i--;
+                }
+            }
+
+            while (stack.Count > 0)
+            {
+                var top = stack.Pop();
+                maxArea = Math.Max(maxArea, (heights[top] * (stack.Count() == 0 ? heights.Length - 1 : heights.Length - 1 - 1 - stack.Peek())));
+            }
+
+            return maxArea;
         }
 
-        private int LargestRectangleAreaStack(int[] heights)
-        {
-            return 0;
-        }
-
+        //TODO: Dynamic Programming
         private void LargestRectangleArea(int[] heights, int start, int end, ref int result, ref int low)
         {
             if (start == end)
@@ -152,5 +168,66 @@ namespace Leetcode
             }
         }
 
+        /*
+         * https://leetcode.com/problems/maximal-rectangle/
+         */
+        public int MaximalRectangleStack(char[][] matrix)
+        {
+            var matrixInt = new int[matrix.Length][];
+            var maxArea = 0;
+
+            for (var i = 0; i < matrix.Length; i++)
+            {
+                matrixInt[i] = new int[matrix[i].Length];
+
+                for (var j = 0; j < matrix[i].Length; j++)
+                {
+                    if (matrix[i][j] == '1')
+                    {
+                        if (i == 0)
+                        {
+                            matrixInt[i][j] = 1;
+                        }
+                        else
+                        {
+                            matrixInt[i][j] = matrixInt[i - 1][j] + 1;
+                        }
+                    }
+                    else
+                    {
+                        matrixInt[i][j] = 0;
+                    }
+                }
+
+                var stack = new Stack<int>();
+                for (var l = 0; l < matrixInt[i].Length; l++)
+                {
+                    if (stack.Count() == 0 || matrixInt[i][l] >= matrixInt[i][stack.Peek()])
+                    {
+                        stack.Push(l);
+                    }
+                    else
+                    {
+                        var top = stack.Pop();
+                        maxArea = Math.Max(maxArea, (matrixInt[i][top] * (stack.Count() == 0 ? l : l - 1 - stack.Peek())));
+                        l--;
+                    }
+                }
+
+                while (stack.Count() > 0)
+                {
+                    var top = stack.Pop();
+                    maxArea = Math.Max(maxArea, (matrixInt[i][top] * (stack.Count() == 0 ? matrixInt[i].Length : matrixInt[i].Length - 1 - stack.Peek())));
+                }
+            }
+
+            return maxArea;
+        }
+
+        //TODO: Dynamic Programming
+        public int MaximalRectangleDynamicProgramming(char[][] matrix)
+        {
+            return 0;
+        }
     }
 }

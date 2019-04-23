@@ -22,10 +22,37 @@ namespace SolutionUnitTest
         }
 
         [TestMethod]
-        public void LargestRectangleAreaTest()
+        public void LargestRectangleAreaStackTest()
         {
             var stack = new StackProblem();
-            stack.LargestRectangleArea(new int[] { 2, 1, 5, 6, 2, 3 });
+            stack.LargestRectangleAreaStack(new int[] { 2, 1, 5, 6, 2, 3 });
+        }
+
+        [TestMethod]
+        public void LargestRectangleAreaDynamicProgrammingTest()
+        {
+            
+        }
+
+        [TestMethod]
+        public void MaximalRectangleStackTest()
+        {
+            var stack = new StackProblem();
+            var input = new char[][]
+            {
+                new char[] {'1', '0', '1', '0', '0'},
+                new char[] {'1', '0', '1', '1', '1'},
+                new char[] {'1', '1', '1', '1', '1'},
+                new char[] {'1', '0', '0', '1', '0'}
+            };
+
+            stack.MaximalRectangleStack(input);
+        }
+
+        [TestMethod]
+        public void MaximalRectangleDynamicProgrammingTest()
+        {
+
         }
     }
 }
