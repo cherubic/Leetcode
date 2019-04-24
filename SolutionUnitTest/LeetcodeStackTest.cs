@@ -31,7 +31,7 @@ namespace SolutionUnitTest
         [TestMethod]
         public void LargestRectangleAreaDynamicProgrammingTest()
         {
-            
+
         }
 
         [TestMethod]
@@ -53,6 +53,22 @@ namespace SolutionUnitTest
         public void MaximalRectangleDynamicProgrammingTest()
         {
 
+        }
+
+        [TestMethod]
+        public void InorderTraversalTest()
+        {
+            var stack = new StackProblem();
+            var root = new StackProblem.TreeNode(1)
+            {
+                left = null,
+                right = new StackProblem.TreeNode(2)
+                {
+                    left = new StackProblem.TreeNode(3)
+                }
+            };
+
+            stack.InorderTraversal(root);
         }
     }
 }

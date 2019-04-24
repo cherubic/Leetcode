@@ -229,5 +229,150 @@ namespace Leetcode
         {
             return 0;
         }
+
+        public class TreeNode
+        {
+            public int val;
+            public TreeNode left;
+            public TreeNode right;
+            public TreeNode(int x) { val = x; }
+        }
+
+        /*
+         * https://leetcode.com/problems/binary-tree-inorder-traversal/
+         */
+        public IList<int> InorderTraversal(TreeNode root)
+        {
+
+            var result = new List<int>();
+            if (root == null) return result;
+
+            if (root.left != null)
+            {
+                result.AddRange(InorderTraversal(root.left));
+            }
+
+            result.Add(root.val);
+
+            if (root.right != null)
+            {
+                result.AddRange(InorderTraversal(root.right));
+            }
+
+            return result;
+        }
+
+        public IList<int> InorderTraversalStack(TreeNode root)
+        {
+            var result = new List<int>();
+            var stack = new Stack<TreeNode>();
+            var current = root;
+            while (current != null || stack.Count() != 0)
+            {
+                while (current != null)
+                {
+                    stack.Push(current);
+                    current = current.left;
+                }
+
+                current = stack.Pop();
+                result.Add(current.val);
+                current = current.right;
+            }
+
+            return result;
+        }
+
+        /*
+         * https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/
+         */
+        public IList<IList<int>> ZigzagLevelOrder(TreeNode root)
+        {
+            return null;
+        }
+
+        /*
+         *https://leetcode.com/problems/binary-tree-preorder-traversal/
+         */
+        public IList<int> PreorderTraversal(TreeNode root)
+        {
+            var result = new List<int>();
+            if (root == null) return result;
+
+            result.Add(root.val);
+
+            if (root.left != null)
+                result.AddRange(PreorderTraversal(root.left));
+
+            if (root.right != null)
+                result.AddRange(PreorderTraversal(root.right));
+
+            return result;
+        }
+
+        public IList<int> PreorderTraversalStack(TreeNode root)
+        {
+            var result = new List<int>();
+            var stack = new Stack<TreeNode>();
+            var current = root;
+            while (current != null)
+            {
+                result.Add(current.val);
+                if (current.right != null)
+                {
+                    stack.Push(current.right);
+                }
+
+                current = current.left;
+                if (current == null && stack.Count() > 0)
+                {
+                    current = stack.Pop();
+                }
+            }
+
+            return result;
+        }
+
+        /*
+         * https://leetcode.com/problems/binary-tree-postorder-traversal/
+         */
+        public IList<int> PostorderTraversal(TreeNode root)
+        {
+            var result = new List<int>();
+            if (root == null) return result;
+
+            if (root.left != null)
+                result.AddRange(PostorderTraversal(root.left));
+
+            if (root.right != null)
+                result.AddRange(PostorderTraversal(root.right));
+
+            result.Add(root.val);
+
+            return result;
+        }
+
+        public IList<int> PostorderTraversalStack(TreeNode root)
+        {
+            var result = new List<int>();
+            var stack = new Stack<TreeNode>();
+            var current = root;
+            while (current != null || stack.Count() != 0)
+            {
+                if (current != null)
+                {
+                    stack.Push(current);
+                    result.Prepend(current.val);
+                    current = current.right;
+                }
+                else
+                {
+                    current = stack.Pop();
+                    current = current.left;
+                }
+            }
+
+            return result;
+        }
     }
 }
