@@ -334,7 +334,7 @@ namespace Algorithm
                 y = TreeMinimum(z.Right);
                 yOriginalColor = y.Color;
                 x = y.Right;
-                if (x.Parent == z)
+                if (y.Parent == z)
                 {
                     x.Parent = y;
                 }
